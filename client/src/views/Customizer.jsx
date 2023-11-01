@@ -26,13 +26,27 @@ function Customizer() {
       case "colorpicker":
         return <ColorPicker />
       case "filepicker":
-        return <FilePicker file={file} setFile={setFile} />
+        return <FilePicker file={file} setFile={setFile} readFile={readFile}/>
       case "aipicker":
-        return <AIPicker />
+        return <AIPicker prompt={prompt} setPrompt={setPrompt} generatingImg={generateImg} handleSubmit={handleSubmit}/>
       default:
         break;
     }
   };
+
+  const handleSubmit = async (type) =>{
+    if(!prompt) return alert("Please enter a promt");
+
+    try{
+      // Call backend to generate AI image
+    }catch(e){
+      alert(e);
+    }finally{
+      setGenerateImg(false);
+      setActiveEditorTab("");
+
+    }
+  }
 
   const handleDecals = (type,result) => {
     const decalType = DecalTypes[type];
@@ -58,6 +72,14 @@ function Customizer() {
         state.isLogoTexture = true
         break;
     }
+
+    // Set active filter tab
+    setActiveFilterTab((prevState)=>{
+      return{
+        ...prevState,
+        [tabName]: !prevState[tabName]
+      }
+    });
   }
 
   const readFile = (type)=>{
@@ -75,7 +97,7 @@ function Customizer() {
             <div className='flex items-center min-h-screen'>
               <div className=' editortabs-container tabs'>
                 {EditorTabs.map((tab)=>(
-                  <Tab key={tab.name} tab={tab} handleClick={()=>{setActiveEditorTab(tab.name)}}/>
+                  <Tab key={tab.name} tab={tab} handleClick={()=>{activeEditorTab != tab.name ? setActiveEditorTab(tab.name) : setActiveEditorTab("")}}/>
                 ))}
 
                 {generateTabContent()}
@@ -88,7 +110,7 @@ function Customizer() {
 
           <motion.div className='filtertabs-container' {...slideAnimation('up')}>
             {FilterTabs.map((tab)=>(
-              <Tab key={tab.name} tab={tab} isFilterTab isActiveTab="" handleClick={()=>{}}/>
+              <Tab key={tab.name} tab={tab} isFilterTab isActiveTab={activeFilterTab[tab.name]} handleClick={()=> handleActiveFilterTab(tab.name)}/>
             ))}
           </motion.div>
         </>
