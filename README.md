@@ -22,7 +22,7 @@ Then you need to try **JustTees**. Using our state of the art software, you can 
 To deploy this project, first clone this repo and `cd` into the folder of the cloned repo. Then run the following commands:
 
 ```bash
-  cd client/client;
+  cd client;
   npm install;
   npm run dev;
 
