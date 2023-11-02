@@ -9,7 +9,13 @@ const AIPicker = ({prompt,setPrompt,generatingImg,handleSubmit}) => {
       </textarea>
 
       <div className='flex flex-wrap gap-3'>
-        {generatingImg ? (<RegularButton/>): (<></>)}
+        {generatingImg ? (
+          <RegularButton type="outline" title="Asking AI" customStyle="text-xs"/>
+        ): 
+        (<>
+          <RegularButton type="outline" title="AI Logo" handleClick={()=>handleSubmit('logo')} customStyle="text-xs"/>
+          <RegularButton type="filled" title="AI Full" handleClick={()=>handleSubmit('full')} customStyle="text-xs"/>
+        </>)}
       </div>
     </div>
   )
