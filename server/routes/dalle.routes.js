@@ -11,35 +11,31 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+router.get('/', (req, res) => {
+    res.status(200).json({
+        message: "Hello from DALL.E ROUTES"
+    });
+});
 
+router.post('/generate', async (req, res) => {
+    try {
+        const prompt = req.body.prompt;
+        const response = await openai.images.generate({
+            prompt,
+            n: 1,
+            size: '1024x1024',
+            response_format: 'b64_json'
+        });
+        const image = response.data.data[0].b64_json;
 
-router.route('/').get(
-    (req,res) => {
         res.status(200).json({
-            message: "Hello from DALL.E ROUTES"
-        })
+            message: "Image generated successfully",
+            image, // Include the base64 encoded image data in the response
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "An error occurred while generating the image.",error:error });
     }
-)
-router.route('/').post(
-    async (req,res) => {
-        try {
-            const prompt = req.body;
-            const response = await openai.images.generate({
-                prompt,
-                n:1,
-                size:'1024x1024',
-                response_format: 'b64_json'
-            })
-            const image = response.data.data[0].b64_json
+});
 
-            res.status(200).json({
-                message: "Hello from DALL.E ROUTES"
-            })
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({photo: image})
-        }
-    }
-)
-
-export default router
+export default router;

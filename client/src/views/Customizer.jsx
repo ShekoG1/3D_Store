@@ -40,7 +40,7 @@ function Customizer() {
     try{
       // Call backend to generate AI image
       setGenerateImg(true);
-      const response = await fetch('http://localhost:8080/api/v1/dalle',{
+      const response = await fetch('http://localhost:8080/api/v1/dalle/generate',{
         method:'POST',
         headers:{
           'Content-Type':'application/json'
@@ -53,8 +53,12 @@ function Customizer() {
       console.log(response)
 
       const data = await response.json();
-      alert("Complete")
-      handleDecals(type, `data:image/png;base64,${data.photo}`);
+      if(data.photo != null){
+        handleDecals(type, `data:image/png;base64,${data.photo}`);
+      }else{
+        alert("Could not generate image. Please try again later.");
+        console.log(data)
+      }
 
     }catch(e){
       alert(e);
