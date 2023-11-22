@@ -17,12 +17,15 @@ Then you need to try **JustTees**. Using our state of the art software, you can 
 - We are device friendly! Whether you are on mobile, tablet or desktop (Yes, that includes your laptop) you can be sure that **JustTees** will work *Just Fine*
 
 
+## Screenshots
+
+![App Screenshot](https://drive.google.com/file/d/12-eCYV7hc8YFRdWIQrAE4TlR27BBPK06)
 ## Deployment
 
 To deploy this project, first clone this repo and `cd` into the folder of the cloned repo. Then run the following commands:
 
 ```bash
-  cd client;
+  cd client/client;
   npm install;
   npm run dev;
 
