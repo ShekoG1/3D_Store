@@ -19,7 +19,7 @@ Then you need to try **JustTees**. Using our state of the art software, you can 
 
 ## Screenshots
 
-![App Screenshot]("https://github.com/ShekoG1/JustTees/edit/main/Screenshot from 2023-11-02 07-49-24.png")
+![App Screenshot](https://github.com/ShekoG1/JustTees/blob/main/App_Screenshots/Customizer.png)
 ## Deployment
 
 To deploy this project, first clone this repo and `cd` into the folder of the cloned repo. Then run the following commands:
